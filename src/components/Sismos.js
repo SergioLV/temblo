@@ -1,0 +1,102 @@
+import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Tooltip from "@mui/material/Tooltip";
+
+import RoomOutlinedIcon from "@mui/icons-material/RoomOutlined";
+
+function Sismos({ sismos, setSismos, actual, setActual }) {
+  const [activo, setActivo] = useState(false);
+  const getSismos = async () => {
+    await axios.get("https://api.xor.cl/sismo/recent").then((response) => {
+      if (response.data.status_code === 0) {
+        setSismos(response.data.events);
+      }
+    });
+  };
+
+  const formatDate = (date2) => {
+    const options = {
+      hour12: false,
+      weekday: "short",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+    const time = new Date(date2).toLocaleTimeString("es", options);
+
+    return time;
+  };
+  let color = "action";
+  const handlerSelection = (sismo) => {
+    setActual(sismo);
+    if (activo) {
+      setActivo(false);
+      color = "error";
+    } else {
+      setActivo(true);
+      color = "action";
+    }
+  };
+  useEffect(() => {
+    getSismos();
+  }, []);
+  return (
+    <div>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 300 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Hora Local</TableCell>
+              <TableCell align="center">Intensidad (ML)</TableCell>
+              <TableCell align="center">Profundidad (KM)</TableCell>
+              <TableCell align="center">Ubicación</TableCell>
+              <TableCell align="center">Mapa</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sismos.slice(0, 10).map((sismo) => (
+              <TableRow
+                key={sismo.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="sismo">
+                  {formatDate(sismo.local_date)}
+                </TableCell>
+                <TableCell align="center">{sismo.magnitude.value}</TableCell>
+                <TableCell align="center">{sismo.depth}</TableCell>
+                <TableCell align="center">{sismo.geo_reference}</TableCell>
+                <TableCell
+                  component="th"
+                  scope="row"
+                  align="center"
+                  key={sismo.id}
+                >
+                  <Tooltip title="Ver en el mapa" placement="top-start">
+                    <RoomOutlinedIcon
+                      color={color}
+                      className="actual"
+                      onClick={() => {
+                        handlerSelection(sismo);
+                      }}
+                    />
+                  </Tooltip>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+  );
+}
+
+export default Sismos;
