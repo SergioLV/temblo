@@ -14,11 +14,12 @@ export default function Mapa({ actual }) {
 
   const coordinates = { lat: 33.4429, lng: 70.6539 };
 
+  console.log();
   return (
     // Important! Always set the container height explicitly
     <div style={{ height: "40vh", width: "100%" }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyAEJ2nZg8W2d0LKteGzRMxW6QcKVj1GDCk" }}
+        bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
         defaultCenter={coordinates}
         center={coor}
         defaultZoom={11}
