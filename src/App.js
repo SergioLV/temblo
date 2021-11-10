@@ -27,7 +27,7 @@ function App() {
           <span style={style}>T</span>embló?
         </h1>
         <p>
-          Una pequeño sitio web que muestra los últimos sismos ocurridos en
+          Un pequeño sitio web que muestra los últimos sismos ocurridos en
           Chile. Se nutre de la API{" "}
           <a href="https://xor.cl/api/sismo/">https://xor.cl/api/sismo/</a>
         </p>
