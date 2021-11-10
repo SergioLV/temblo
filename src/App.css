@@ -67,6 +67,10 @@
   justify-content: center;
   padding-bottom: 1rem;
 }
+.loading{
+  display: flex;
+  flex-direction: column;
+}
 
 
 

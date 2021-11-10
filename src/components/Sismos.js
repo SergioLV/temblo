@@ -21,10 +21,12 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
     color: "#3083DC",
   };
   const [activo, setActivo] = useState(false);
+  const [loading, setLoading] = useState(false);
   const getSismos = async () => {
     await axios.get("https://api.xor.cl/sismo/recent").then((response) => {
       if (response.data.status_code === 0) {
         setSismos(response.data.events);
+        setLoading(true);
       }
     });
   };
@@ -59,6 +61,7 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
           <span style={style}>H</span>az click en el ícono <RoomOutlinedIcon />{" "}
           para ver el sismo en el mapa.{" "}
         </h3>
+        {/* {sismos ?  : } */}
       </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 520 }} aria-label="simple table">
@@ -72,7 +75,7 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {sismos ? (
+            {loading ? (
               sismos.slice(0, 10).map((sismo) => (
                 <TableRow
                   key={sismo.id}
@@ -103,7 +106,9 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
                 </TableRow>
               ))
             ) : (
-              <CircularProgress color="inherit" />
+              <div className="loading">
+                <CircularProgress /> <p>Cargando Sismos</p>
+              </div>
             )}
           </TableBody>
         </Table>
