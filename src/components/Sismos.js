@@ -64,13 +64,13 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
         {/* {sismos ?  : } */}
       </div>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 520 }} aria-label="simple table">
+        <Table sx={{ minWidth: 500 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell align="center">Mapa</TableCell>
               <TableCell align="center">Ubicación</TableCell>
               <TableCell align="center">Hora Local</TableCell>
-              <TableCell align="center">Intensidad (ML)</TableCell>
+              <TableCell align="center">Richter</TableCell>
               <TableCell align="center">Profundidad (KM)</TableCell>
             </TableRow>
           </TableHead>
