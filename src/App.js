@@ -48,7 +48,7 @@ function App() {
                 <span style={style}>E</span>n el mapa:{" "}
               </h1>
               <h2>
-                Sismo {actual.magnitude.value} ML a {actual.geo_reference}
+                Sismo {actual.magnitude.value}º R. a {actual.geo_reference}
               </h2>
             </div>
             <div className="mapa-container">

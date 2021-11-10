@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { scroller } from "react-scroll";
 import axios from "axios";
 
 import Table from "@mui/material/Table";
@@ -27,18 +28,24 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
     });
   };
 
-  const formatDate = (date2) => {
-    return moment(date2).format("lll");
+  const formatDate = (date) => {
+    return moment(date).format("lll");
   };
-  let color = "action";
+
   const handlerSelection = (sismo) => {
     setActual(sismo);
+    console.log();
+    if (window.matchMedia("(max-width: 1024px)").matches) {
+      scroller.scrollTo("mapa-description", {
+        duration: 800,
+        delay: 0,
+        smooth: "easeInOutQuart",
+      });
+    }
     if (activo) {
       setActivo(false);
-      color = "error";
     } else {
       setActivo(true);
-      color = "action";
     }
   };
   useEffect(() => {
@@ -53,12 +60,12 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
         </h3>
       </div>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 580 }} aria-label="simple table">
+        <Table sx={{ minWidth: 520 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell align="center">Mapa</TableCell>
               <TableCell align="center">Ubicación</TableCell>
-              <TableCell>Hora Local</TableCell>
+              <TableCell align="center">Hora Local</TableCell>
               <TableCell align="center">Intensidad (ML)</TableCell>
               <TableCell align="center">Profundidad (KM)</TableCell>
             </TableRow>
