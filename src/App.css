@@ -12,6 +12,7 @@
   height: 100vh;
   background-color: rgb(242, 254, 254);
 }
+
 .title {
   padding-top: 1rem;
   padding-bottom: 2rem;
@@ -23,7 +24,7 @@
   font-size: 2rem;
   font-weight: 200;
 }
-.title p{
+.title p {
   font-size: 1rem;
   color: rgb(164, 164, 164);
 }
@@ -33,56 +34,33 @@
   justify-content: center;
   align-items: center;
 }
-@media (max-width: 1024px) {
-  .contenido {
-    flex-direction: column;
-  }
-  .mapa-container {
-    width: 20rem !important;
-  }
-  .mapa-location{
-    padding-left: 0 !important;
-  }
-  .footer{
-    /* display: none; */
-    /* position: relative;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
 
-    width: 100%; */
-    color: #FFF;
-    background-color: #000;
-  }
-}
 .tabla {
   width: 45%;
 }
 .actual:hover {
-  cursor:pointer;
+  cursor: pointer;
 }
-.mapa-location{
+.mapa-location {
   padding-left: 3rem;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 .mapa-container {
   width: 40rem;
 }
-.location{
+.location {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.table-tutorial{
+.table-tutorial {
   padding-bottom: 1rem;
 }
-.mapa-description{
+.mapa-description {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,16 +68,49 @@
   padding-bottom: 1rem;
 }
 
-.footer{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-   /* padding-left: 1rem; */
-  width: 100%;
-  color: #000;
-  background-color: #3083DC;
-} 
 
+
+@media (max-width: 1024px) {
+  .bg__img {
+    height: 200vh;
+    background-color: rgb(242, 254, 254);
+  }
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 2rem;
+    font-weight: 200;
+  }
+  .title p{
+    text-align: center;
+    /* color: green; */
+  }
+  .contenido {
+    flex-direction: column;
+  }
+  .mapa-location {
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .mapa-description {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1rem;
+    width: 75%;
+  }
+  .mapa-description h2{
+    text-align: center;
+  }
+  .mapa-container {
+    width: 15rem;
+  }
+}

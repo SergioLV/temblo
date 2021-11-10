@@ -57,7 +57,6 @@ function App() {
           </div>
         </div>
       </div>
-      <div className="footer">@PelelaProgramador</div>
     </div>
   );
 }
