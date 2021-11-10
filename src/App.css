@@ -72,7 +72,7 @@
 
 @media (max-width: 1024px) {
   .bg__img {
-    height: 200vh;
+    height: 250vh;
     background-color: rgb(242, 254, 254);
   }
   .title {
