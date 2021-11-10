@@ -11,11 +11,12 @@ function App() {
   const [sismos, setSismos] = useState([]);
   const [actual, setActual] = useState({
     // La moneda
-    // latitude: -33.4429,
-    // longitude: -70.6539,
+    // latitude: lat,
+    // longitude: lon,
     latitude: 0,
     longitude: 0,
     geo_reference: "",
+    magnitude: { value: 0 },
   });
 
   return (
@@ -42,17 +43,21 @@ function App() {
         </div>
         <div className="mapa-content">
           <div className="mapa-location">
-            <h1>
-              <span style={style}>E</span>n el mapa:{" "}
-            </h1>
-            <h2>Sismo a {actual.geo_reference}</h2>
+            <div className="mapa-description">
+              <h1>
+                <span style={style}>E</span>n el mapa:{" "}
+              </h1>
+              <h2>
+                Sismo {actual.magnitude.value} ML a {actual.geo_reference}
+              </h2>
+            </div>
             <div className="mapa-container">
               <Mapa actual={actual} />
             </div>
           </div>
         </div>
       </div>
-      <div className="footer">@PelelaProgramador</div>
+      {/* <div className="footer">@PelelaProgramador</div> */}
     </div>
   );
 }

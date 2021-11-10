@@ -22,7 +22,7 @@ export default function Mapa({ actual }) {
         bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
         defaultCenter={coordinates}
         center={coor}
-        defaultZoom={11}
+        defaultZoom={7}
         yesIWantToUseGoogleMapApiInternals
       >
         <AnyReactComponent lat={coor.lat} lng={coor.lng} text="Suceso" />

@@ -14,6 +14,9 @@ import Tooltip from "@mui/material/Tooltip";
 import RoomOutlinedIcon from "@mui/icons-material/RoomOutlined";
 
 function Sismos({ sismos, setSismos, actual, setActual }) {
+  const style = {
+    color: "#3083DC",
+  };
   const [activo, setActivo] = useState(false);
   const getSismos = async () => {
     await axios.get("https://api.xor.cl/sismo/recent").then((response) => {
@@ -51,6 +54,12 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
   }, []);
   return (
     <div>
+      <div className="table-tutorial">
+        <h3>
+          <span style={style}>H</span>az click en el ícono <RoomOutlinedIcon />{" "}
+          para ver el sismo en el mapa.{" "}
+        </h3>
+      </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 300 }} aria-label="simple table">
           <TableHead>
@@ -82,7 +91,7 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
                 >
                   <Tooltip title="Ver en el mapa" placement="top-start">
                     <RoomOutlinedIcon
-                      color={color}
+                      color={activo ? "action" : "error"}
                       className="actual"
                       onClick={() => {
                         handlerSelection(sismo);
