@@ -53,7 +53,7 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
         </h3>
       </div>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 300 }} aria-label="simple table">
+        <Table sx={{ minWidth: 580 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell align="center">Mapa</TableCell>
