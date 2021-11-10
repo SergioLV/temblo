@@ -12,6 +12,7 @@ import Paper from "@mui/material/Paper";
 import Tooltip from "@mui/material/Tooltip";
 
 import RoomOutlinedIcon from "@mui/icons-material/RoomOutlined";
+import moment from "moment";
 
 function Sismos({ sismos, setSismos, actual, setActual }) {
   const style = {
@@ -27,16 +28,7 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
   };
 
   const formatDate = (date2) => {
-    const options = {
-      hour12: false,
-      weekday: "short",
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    };
-    const time = new Date(date2).toLocaleTimeString("es", options);
-
-    return time;
+    return moment(date2).format("lll");
   };
   let color = "action";
   const handlerSelection = (sismo) => {
