@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { scroller } from "react-scroll";
 import axios from "axios";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -71,36 +72,40 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {sismos.slice(0, 10).map((sismo) => (
-              <TableRow
-                key={sismo.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell
-                  component="th"
-                  scope="row"
-                  align="center"
+            {sismos ? (
+              sismos.slice(0, 10).map((sismo) => (
+                <TableRow
                   key={sismo.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <Tooltip title="Ver en el mapa" placement="top-start">
-                    <RoomOutlinedIcon
-                      color={activo ? "action" : "error"}
-                      className="actual"
-                      onClick={() => {
-                        handlerSelection(sismo);
-                      }}
-                    />
-                  </Tooltip>
-                </TableCell>
-                <TableCell align="center">{sismo.geo_reference}</TableCell>
-                <TableCell component="th" scope="sismo">
-                  {formatDate(sismo.local_date)}
-                </TableCell>
+                  <TableCell
+                    component="th"
+                    scope="row"
+                    align="center"
+                    key={sismo.id}
+                  >
+                    <Tooltip title="Ver en el mapa" placement="top-start">
+                      <RoomOutlinedIcon
+                        color={activo ? "action" : "error"}
+                        className="actual"
+                        onClick={() => {
+                          handlerSelection(sismo);
+                        }}
+                      />
+                    </Tooltip>
+                  </TableCell>
+                  <TableCell align="center">{sismo.geo_reference}</TableCell>
+                  <TableCell component="th" scope="sismo">
+                    {formatDate(sismo.local_date)}
+                  </TableCell>
 
-                <TableCell align="center">{sismo.magnitude.value}</TableCell>
-                <TableCell align="center">{sismo.depth}</TableCell>
-              </TableRow>
-            ))}
+                  <TableCell align="center">{sismo.magnitude.value}</TableCell>
+                  <TableCell align="center">{sismo.depth}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <CircularProgress color="inherit" />
+            )}
           </TableBody>
         </Table>
       </TableContainer>
