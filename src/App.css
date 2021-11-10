@@ -88,6 +88,9 @@
     text-align: center;
     /* color: green; */
   }
+  .tabla {
+    width: 90%;
+  }
   .contenido {
     flex-direction: column;
   }

@@ -64,11 +64,11 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
         <Table sx={{ minWidth: 300 }} aria-label="simple table">
           <TableHead>
             <TableRow>
+              <TableCell align="center">Mapa</TableCell>
+              <TableCell align="center">Ubicación</TableCell>
               <TableCell>Hora Local</TableCell>
               <TableCell align="center">Intensidad (ML)</TableCell>
               <TableCell align="center">Profundidad (KM)</TableCell>
-              <TableCell align="center">Ubicación</TableCell>
-              <TableCell align="center">Mapa</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -77,12 +77,6 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
                 key={sismo.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="sismo">
-                  {formatDate(sismo.local_date)}
-                </TableCell>
-                <TableCell align="center">{sismo.magnitude.value}</TableCell>
-                <TableCell align="center">{sismo.depth}</TableCell>
-                <TableCell align="center">{sismo.geo_reference}</TableCell>
                 <TableCell
                   component="th"
                   scope="row"
@@ -99,6 +93,13 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
                     />
                   </Tooltip>
                 </TableCell>
+                <TableCell align="center">{sismo.geo_reference}</TableCell>
+                <TableCell component="th" scope="sismo">
+                  {formatDate(sismo.local_date)}
+                </TableCell>
+
+                <TableCell align="center">{sismo.magnitude.value}</TableCell>
+                <TableCell align="center">{sismo.depth}</TableCell>
               </TableRow>
             ))}
           </TableBody>
