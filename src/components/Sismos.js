@@ -98,7 +98,6 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
                   <TableCell component="th" scope="sismo">
                     {formatDate(sismo.local_date)}
                   </TableCell>
-
                   <TableCell align="center">{sismo.magnitude.value}</TableCell>
                   <TableCell align="center">{sismo.depth}</TableCell>
                 </TableRow>
