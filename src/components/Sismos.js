@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { scroller } from "react-scroll";
 import axios from "axios";
-import CircularProgress from "@mui/material/CircularProgress";
+import Skeleton from "@mui/material/Skeleton";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -20,7 +20,7 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
   const style = {
     color: "#3083DC",
   };
-  const [activo, setActivo] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const getSismos = async () => {
     await axios.get("https://api.xor.cl/sismo/recent").then((response) => {
@@ -37,18 +37,13 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
 
   const handlerSelection = (sismo) => {
     setActual(sismo);
-    console.log();
+
     if (window.matchMedia("(max-width: 1024px)").matches) {
       scroller.scrollTo("mapa-description", {
         duration: 800,
         delay: 0,
         smooth: "easeInOutQuart",
       });
-    }
-    if (activo) {
-      setActivo(false);
-    } else {
-      setActivo(true);
     }
   };
   useEffect(() => {
@@ -75,41 +70,65 @@ function Sismos({ sismos, setSismos, actual, setActual }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {loading ? (
-              sismos.slice(0, 10).map((sismo) => (
-                <TableRow
-                  key={sismo.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    align="center"
+            {loading
+              ? sismos.slice(0, 10).map((sismo) => (
+                  <TableRow
                     key={sismo.id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <Tooltip title="Ver en el mapa" placement="top-start">
-                      <RoomOutlinedIcon
-                        color={activo ? "action" : "error"}
-                        className="actual"
-                        onClick={() => {
-                          handlerSelection(sismo);
-                        }}
-                      />
-                    </Tooltip>
-                  </TableCell>
-                  <TableCell align="center">{sismo.geo_reference}</TableCell>
-                  <TableCell component="th" scope="sismo">
-                    {formatDate(sismo.local_date)}
-                  </TableCell>
-                  <TableCell align="center">{sismo.magnitude.value}</TableCell>
-                  <TableCell align="center">{sismo.depth}</TableCell>
-                </TableRow>
-              ))
-            ) : (
-              <div className="loading">
-                <CircularProgress /> <p>Cargando Sismos</p>
-              </div>
-            )}
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      align="center"
+                      key={sismo.id}
+                    >
+                      <Tooltip title="Ver en el mapa" placement="top-start">
+                        <RoomOutlinedIcon
+                          color={sismo.id === actual.id ? "error" : "action"}
+                          className="actual"
+                          onClick={() => {
+                            handlerSelection(sismo);
+                          }}
+                        />
+                      </Tooltip>
+                    </TableCell>
+                    <TableCell align="center">{sismo.geo_reference}</TableCell>
+                    <TableCell component="th" scope="sismo">
+                      {formatDate(sismo.local_date)}
+                    </TableCell>
+                    <TableCell align="center">
+                      {sismo.magnitude.value}
+                    </TableCell>
+                    <TableCell align="center">{sismo.depth}</TableCell>
+                  </TableRow>
+                ))
+              : [1, 2, 3, 4, 5, 6, 7, 8, 9].map((row) => (
+                  <TableRow
+                    // key={sismo.id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      align="center"
+                      // key={sismo.id}
+                    >
+                      <Skeleton />
+                    </TableCell>
+                    <TableCell align="center">
+                      <Skeleton />{" "}
+                    </TableCell>
+                    <TableCell component="th" scope="sismo">
+                      <Skeleton />
+                    </TableCell>
+                    <TableCell align="center">
+                      <Skeleton />{" "}
+                    </TableCell>
+                    <TableCell align="center">
+                      <Skeleton />{" "}
+                    </TableCell>
+                  </TableRow>
+                ))}
           </TableBody>
         </Table>
       </TableContainer>
